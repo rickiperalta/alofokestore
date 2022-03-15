@@ -1,1 +1,1 @@
-# alofokestore
+# alofokestore.com
