@@ -1,2 +1,1 @@
-# alofokestore
-Tienda Online
+www.alofokestore.com
