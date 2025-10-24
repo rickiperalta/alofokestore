@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda Elegante</title>
+  <style>
+    body { font-family: 'Georgia', serif; margin: 0; background: #fdfdfd; color: #333; }
+    header, footer { background: #1a1a1a; color: white; text-align: center; padding: 1em; }
+    .productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1em; padding: 2em; }
+    .producto { background: white; padding: 1em; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .producto img { max-width: 100%; border-radius: 4px; }
+    .carrito { position: fixed; top: 1em; right: 1em; background: #fff; padding: 1em; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 300px; }
+    .carrito h3 { margin-top: 0; }
+    .boton { background: #4b0082; color: white; border: none; padding: 0.5em 1em; border-radius: 4px; cursor: pointer; margin-top: 0.5em; }
+    .contador { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tienda Elegante</h1>
+    <p>Productos exclusivos para ti</p>
+  </header>
+
+  <section class="productos" id="productos"></section>
+
+  <div class="carrito">
+    <h3>🛒 Carrito (<span class="contador" id="contador">0</span>)</h3>
+    <ul id="lista-carrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button class="boton" onclick="pagarPorWhatsApp()">Pagar por WhatsApp</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Tienda Elegante | Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    const productos = [
+      {
+        id: 1,
+        nombre: "Perfume Royal",
+        precio: 45,
+        descripcion: "Fragancia sofisticada para ocasiones especiales.",
+        imagen: "https://via.placeholder.com/300x200?text=Perfume",
+        enlacePago: "https://paypal.me/tuusuario/45"
+      },
+      {
+        id: 2,
+        nombre: "Bolso de Cuero",
+        precio: 120,
+        descripcion: "Diseño clásico con acabados premium.",
+        imagen: "https://via.placeholder.com/300x200?text=Bolso",
+        enlacePago: "https://paypal.me/tuusuario/120"
+      }
+    ];
+
+    const carrito = [];
+
+    function renderProductos() {
+      const contenedor = document.getElementById('productos');
+      productos.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}" />
+          <h2>${p.nombre}</h2>
+          <p>${p.descripcion}</p>
+          <p><strong>$${p.precio}</strong></p>
+          <button class="boton" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
+          <a class="boton" href="${p.enlacePago}" target="_blank">Comprar ahora</a>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+
+    function agregarAlCarrito(id) {
+      const producto = productos.find(p => p.id === id);
+      carrito.push(producto);
+      actualizarCarrito();
+    }
+
+    function borrarDelCarrito(index) {
+      carrito.splice(index, 1);
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      const contador = document.getElementById('contador');
+      const total = document.getElementById('total');
+      lista.innerHTML = '';
+      let suma = 0;
+
+      carrito.forEach((p, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          ${p.nombre} - $${p.precio}
+          <a href="${p.enlacePago}" target="_blank">💳</a>
+          <button onclick="borrarDelCarrito(${i})">❌</button>
+        `;
+        lista.appendChild(li);
+        suma += p.precio;
+      });
+
+      contador.textContent = carrito.length;
+      total.textContent = suma;
+    }
+
+    function pagarPorWhatsApp() {
+      if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      const numero = "18297128239"; // ← tu número en formato internacional
+      const productosTexto = carrito.map(p => `• ${p.nombre} - $${p.precio}`).join("\n");
+      const total = carrito.reduce((sum, p) => sum + p.precio, 0);
+
+      const mensaje = encodeURIComponent(
+        `Hola Ricardo 👋\nEstoy interesado en realizar la siguiente compra:\n\n${productosTexto}\n\n💰 Total a pagar: $${total}\n\nPor favor, indícame los métodos de pago disponibles y el tiempo estimado de entrega. ¡Gracias!`
+      );
+
+      const enlace = `https://wa.me/${numero}?text=${mensaje}`;
+      window.open(enlace, "_blank");
+    }
+
+    renderProductos();
+  </script>
+</body>
+</html>
