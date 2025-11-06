@@ -1,0 +1,30 @@
+---
+layout: default
+---
+{% assign p = site.data[page.data.producto] %} 
+
+<main class="product-page-main">
+    <div class="product-detail-container">
+
+        <div class="product-images">
+            <img src="{{ p.imagen_principal }}" alt="{{ p.nombre }}" class="main-image">
+        </div>
+
+        <div class="product-info">
+            <h1>{{ p.nombre }}</h1>
+            <p class="product-price">${{ p.precio }}</p>
+            <p class="product-description">{{ p.descripcion_corta }}</p>
+
+            <button class="btn btn-primary btn-comprar snipcart-add-item"
+                data-item-id="{{ p.sku }}"
+                data-item-name="{{ p.nombre }}"
+                data-item-price="{{ p.precio }}"
+                data-item-url="{{ page.url }}"  
+                data-item-image="{{ p.imagen_principal }}"
+                data-item-custom1-name="Tallas"
+                data-item-custom1-options="{{ p.tallas }}">
+                Añadir al Carrito
+            </button>
+        </div>
+    </div>
+</main>

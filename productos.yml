@@ -1,0 +1,19 @@
+# Lista de todos los productos de AlofokeStore
+
+- slug: pro2-pro2-airoha1562ae
+  nombre: Pro2 Airoha 1562ae
+  precio: 65.00
+  sku: PRO2-001
+  imagen_principal: /assets/images/pro2pro2airoha1562ae.jpg
+  descripcion_corta: Auricular Cancelacion de Ruido 100% premium, logo discreto.
+  tallas: Estandar|#|#|#
+  stock: 15
+
+- slug: monter-cloud
+  nombre: Tenis Monter Cloud
+  precio: 24.99
+  sku: TEN-005
+  imagen_principal: /assets/images/montercloud.jpg
+  descripcion_corta: Tenis Resistente y de alta calidad.
+  tallas: 40|41|42|43
+  stock: 25

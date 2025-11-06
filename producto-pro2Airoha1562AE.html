@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camiseta Clásica - Alofoke Store</title>
+    <link href="style.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://app.snipcart.com">
+    <link rel="preconnect" href="https://cdn.snipcart.com">
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.css" />
+    <div hidden id="snipcart" data-api-key="TU_API_KEY_PUBLICA" data-config-modal-style="side"></div>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="index.html" class="logo">AlofokeStore</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#">Tienda</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+            </ul>
+            <button class="snipcart-checkout btn-carrito">
+                🛒 Carrito (<span class="snipcart-items-count">0</span>)
+            </button>
+        </nav>
+    </header>
+
+    <main class="product-page-main">
+        <div class="product-detail-container">
+
+            <div class="product-images">
+                <img src="https://via.placeholder.com/500x500.png?text=Camiseta+Grande" alt="Pro 2 Airoha 1562AE" class="main-image">
+                </div>
+
+            <div class="product-info">
+                <h1>Pro 2 Airoha 1562AE</h1>
+                <p class="product-price">$65.00</p>
+                <p class="product-description">Nuestro Auricular tiene 100% cancelacion de ruido premium para máxima comodidad.</p>
+
+                <div class="product-options">
+                    <label for="talla">Talla:</label>
+                    <select id="talla">
+                        <option value="Estandar">Estandar</option>
+                        <option value="#"></option>
+                        <option value="#"></option>
+                        <option value="#"></option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary btn-comprar snipcart-add-item"
+                    data-item-id="CAM-001"
+                    data-item-name="Pro 2 Airoha 1562AE"
+                    data-item-price="65.00"
+                    data-item-url="producto-pro2Airoha1562AE.html"
+                    data-item-image="https://via.placeholder.com/100x100.png?text=Auricular"
+                    data-item-custom1-name="Talla"
+                    data-item-custom1-options="Estandar|#|#|#">
+                    Añadir al Carrito
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Alofoke Store. Todos los derechos reservados.</p>
+    </footer>
+
+    <script async src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tallaSelect = document.getElementById('talla');
+            const botonComprar = document.querySelector('.snipcart-add-item');
+
+            if (tallaSelect && botonComprar) {
+                // Función para actualizar el atributo del botón
+                function actualizarTalla() {
+                    const tallaSeleccionada = tallaSelect.value;
+                    botonComprar.setAttribute('data-item-custom1-value', tallaSeleccionada);
+                }
+                
+                // Actualizar al cargar la página
+                actualizarTalla();
+                
+                // Actualizar cada vez que cambia el select
+                tallaSelect.addEventListener('change', actualizarTalla);
+            }
+        });
+    </script>
+</body>
+</html>
